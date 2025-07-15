@@ -12,6 +12,10 @@ class Inventory{
     viewSweets(){
         return this.sweets; //Returns all sweets
     }
+
+    deleteSweet(id){
+        this.sweets = this.sweets.filter(sweet => sweet.id !== id); //Deletes sweet by id
+    }
 }
 
 module.exports = Inventory;
