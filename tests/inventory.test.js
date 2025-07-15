@@ -99,4 +99,18 @@ test('should purchase a sweet and reduce its quantity',()=>{
     const result = inventory.viewSweets();
 
     expect(result[0].quantity).toBe(15);
-})
+});
+
+//Restock Sweet in Inventory and Increase its Quantity
+test('should restock a sweet and increase its quantity',()=>{
+    const inventory = new Inventory();
+    
+    const sweet = new Sweet(1001, 'Kaju Katli','Nut-Based', 50, 15);
+    inventory.addSweet(sweet);
+
+    inventory.restockSweet(1001,10); //Adding 10 more sweets to the inventory
+
+    const result = inventory.viewSweets();
+
+    expect(result[0].quantity).toBe(25);
+});

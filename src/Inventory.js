@@ -45,6 +45,17 @@ class Inventory{
               throw new Error("Sorry To Say. Sweet not found");
         }
     }
+
+    restockSweet(id,quantity){
+        const sweet = this.sweets.find(sweet=>sweet.id === id);
+
+        if(sweet && typeof sweet.quantity === 'number'){
+            sweet.quantity += quantity;
+        }
+        else{
+            throw new Error("Sorry To Say. Sweet not found Or Invalid Quantity");
+        }
+    }
 }
 
 module.exports = Inventory;
