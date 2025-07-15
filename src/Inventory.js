@@ -24,6 +24,10 @@ class Inventory{
     searchByCategory(category){
         return this.sweets.filter(sweet=>sweet.category && sweet.category.toLowerCase() === category.toLowerCase()); //Searches sweets by category
     }
+
+    searchByPrice(price){
+        return this.sweets.filter(sweet=>sweet.price && sweet.price === price); //Searches sweets by price
+    }
 }
 
 module.exports = Inventory;
