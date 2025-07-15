@@ -25,8 +25,8 @@ class Inventory{
         return this.sweets.filter(sweet=>sweet.category && sweet.category.toLowerCase() === category.toLowerCase()); //Searches sweets by category
     }
 
-    searchByPrice(price){
-        return this.sweets.filter(sweet=>sweet.price && sweet.price === price); //Searches sweets by price
+    searchByPriceRange(minPrice, maxPrice){
+        return this.sweets.filter(sweet=>typeof sweet.price =='number' && sweet.price >= minPrice && sweet.price <= maxPrice); //Searches sweets by price
     }
 }
 

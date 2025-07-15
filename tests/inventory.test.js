@@ -78,8 +78,11 @@ test('should search sweets by price',()=>{
 
     sweets.forEach(sweet=>inventory.addSweet(sweet));
 
-    const result = inventory.searchByPrice(50);
+    const result = inventory.searchByPriceRange(25,60); //Looking for sweets between 25 and 60
 
-    expect(result.length).toBe(1);
-    expect(result[0].price).toBe(50);
+    expect(result.length).toBe(2);
+    expect(result[0].price).toBeGreaterThanOrEqual(25);
+    expect(result[0].price).toBeLessThanOrEqual(60);
+    expect(result[1].price).toBeGreaterThanOrEqual(25);
+    expect(result[1].price).toBeLessThanOrEqual(60);
 })
