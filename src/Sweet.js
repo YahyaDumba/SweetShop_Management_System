@@ -1,4 +1,4 @@
-// Allows us to create sweet items that we passing in Inventory.js
+// Represents Single Sweet Item in the Inventory
 
 class Sweet{
     constructor(id,name,category, price,quantity){
