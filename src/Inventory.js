@@ -18,7 +18,11 @@ class Inventory{
     }
 
     searchByName(name){
-        return this.sweets.filter(sweet=> sweet.name.toLowerCase() === name.toLowerCase()); //Searches sweets by name
+        return this.sweets.filter(sweet=>sweet.name && sweet.name.toLowerCase() === name.toLowerCase()); //Searches sweets by name
+    }
+
+    searchByCategory(category){
+        return this.sweets.filter(sweet=>sweet.category && sweet.category.toLowerCase() === category.toLowerCase()); //Searches sweets by category
     }
 }
 

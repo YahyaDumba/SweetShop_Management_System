@@ -47,3 +47,21 @@ test('should search sweets by name',()=>{
     expect(result.length).toBe(2);
     expect(result[0].name).toBe('Kaju Katli');
 });
+
+// Searching Sweet from Inventory on the basis of Category
+test('should search sweets by category',()=>{
+    const inventory = new Inventory();
+
+    const sweets = [
+        new Sweet(1001, 'Kaju Katli','Nut-Based', 50, 20),
+        new Sweet(1002, 'Gajar Halwa','Vegetable-Based', 30, 15),
+        new Sweet(1003, 'Kaju Katli','Milk-Based', 10, 50)
+    ];
+
+    sweets.forEach(sweet=>inventory.addSweet(sweet));
+
+    const result = inventory.searchByCategory('Milk-Based');
+
+    expect(result.length).toBe(1);
+    expect(result[0].category).toBe('Milk-Based');
+});

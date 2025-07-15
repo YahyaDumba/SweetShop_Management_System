@@ -1,10 +1,10 @@
 // Allows us to create sweet items that we passing in Inventory.js
 
 class Sweet{
-    constructor(id,name,type, price,quantity){
+    constructor(id,name,category, price,quantity){
         this.id=id;
         this.name=name;
-        this.type=type;
+        this.category=category;
         this.price=price;
         this.quantity=quantity;
     }
