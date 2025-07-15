@@ -16,6 +16,10 @@ class Inventory{
     deleteSweet(id){
         this.sweets = this.sweets.filter(sweet => sweet.id !== id); //Deletes sweet by id
     }
+
+    searchByName(name){
+        return this.sweets.filter(sweet=> sweet.name.toLowerCase() === name.toLowerCase()); //Searches sweets by name
+    }
 }
 
 module.exports = Inventory;
