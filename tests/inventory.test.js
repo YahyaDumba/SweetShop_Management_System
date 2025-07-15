@@ -86,3 +86,17 @@ test('should search sweets by price',()=>{
     expect(result[1].price).toBeGreaterThanOrEqual(25);
     expect(result[1].price).toBeLessThanOrEqual(60);
 })
+
+//Purchasing Sweet from Inventory and Reducing its Quantity
+test('should purchase a sweet and reduce its quantity',()=>{
+    const inventory = new Inventory();
+    
+    const sweet = new Sweet(1001, 'Kaju Katli','Nut-Based', 50, 20);
+    inventory.addSweet(sweet);
+
+    inventory.purchaseSweet(1001,5);
+
+    const result = inventory.viewSweets();
+
+    expect(result[0].quantity).toBe(15);
+})

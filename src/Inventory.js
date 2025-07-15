@@ -28,6 +28,23 @@ class Inventory{
     searchByPriceRange(minPrice, maxPrice){
         return this.sweets.filter(sweet=>typeof sweet.price =='number' && sweet.price >= minPrice && sweet.price <= maxPrice); //Searches sweets by price
     }
+
+    purchaseSweet(id,quantity){
+        const sweet = this.sweets.find(sweet=>sweet.id === id);
+
+        if(sweet){
+            if(sweet.quantity >= quantity){
+                sweet.quantity -= quantity;
+
+            }
+            else{
+                throw new Error("Sorry To Say. Not enough quantity available");
+            }
+        }
+        else{
+              throw new Error("Sorry To Say. Sweet not found");
+        }
+    }
 }
 
 module.exports = Inventory;
