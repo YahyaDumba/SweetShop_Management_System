@@ -33,13 +33,14 @@ test('should delete a sweet from the Inventory',()=>{
 test('should search sweets by name',()=>{
     const inventory = new Inventory();
 
-    const sweet1 = new Sweet(1, 'Chocolate','Dark', 100, 100);
-    const sweet2 = new Sweet(2, 'Chocolate','Silk', 200, 50);
-    const sweet3 = new Sweet(3, 'Kaju Katli','Nut-Based', 350, 10);
+    const sweets = [
+        new Sweet(1, 'Chocolate','Dark', 100, 100),
+        new Sweet(2, 'Chocolate','Silk', 200, 50),
+        new Sweet(3, 'Kaju Katli','Nut-Based', 350, 10)
+    ];
     
-    inventory.addSweet(sweet1);
-    inventory.addSweet(sweet2);
-    inventory.addSweet(sweet3);
+    
+    sweets.forEach(sweet=>inventory.addSweet(sweet));
 
     const result = inventory.searchByName('Kaju Katli');
 
