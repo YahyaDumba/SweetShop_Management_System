@@ -40,6 +40,14 @@ class Inventory {
     ); //Searches sweets by price
   }
 
+  sortBy(field,direction ='asc'){
+    return this.sweets.slice().sort((a,b)=>{
+      if(a[field] < b[field]) return direction === 'asc' ? -1 : 1;
+      if(a[field] > b[field]) return direction === 'asc' ? 1 : -1;
+      return 0; 
+    });
+  }
+  
   purchaseSweet(id, quantity) {
     const sweet = this.sweets.find((sweet) => sweet.id === id);
 
