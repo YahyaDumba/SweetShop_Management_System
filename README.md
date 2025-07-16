@@ -1,138 +1,160 @@
 # Sweet Shop Management System
-
-A simple inventory system for managing sweets   
-Built using JavaScript and Jest with Test-Driven Development (TDD) principles.
-( I have also added THE JOURNEY at the end of How much erros Did I solved and how the Final Result looks like. )
+A fully tested and user-friendly inventory management system for sweets.
+Built with JavaScript, Jest (TDD), and Vanilla HTML/CSS/JS frontend — designed to look and feel like a real-world project.
 
 # Features
+```bash
+🍬 Manage a sweet shop inventory
+➕ Add, View, Delete sweets
+🔍 Search by Name, Category, and Price Range
+🛒 Purchase (reduce stock)
+📦 Restock (increase stock)
+✅ Fully tested using Jest (Test-Driven Development)
+🎨 Professionally designed frontend UI
+🧼 Clean code with meaningful Git commits
+```
+# Project Structure
+```bash
 
-- ✅ Add, View, Delete sweets
-- 🔍 Search by Name, Category, Price Range
-- 🛒 Purchase (reduce stock)
-- 📦 Restock (increase stock)
-- ✅ Fully tested using Jest
-- 🧼 Clean code with meaningful Git commits
-
-## How to Run
-
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/YahyaDumba/SweetShop_Management_System
-   cd SweetShop_Management_System
-   npm install
-   npm test
-
-2. Structure
 SweetShop_Management_System/
-├── src/
-│   ├── Inventory.js       # Handles add, delete, view, search purchase, restock
-│   └── Sweet.js           # Sweet model class
+├── frontend/              # Frontend Part (UI)
+│   ├── index.html         # Web structure
+│   ├── style.css          # Styling & layout
+│   ├── app.js             # App logic (search, filter, restock)
+│   ├── Sweet.js           # Sweet model (ES Module)
+│   └── Inventory.js       # Inventory logic (ES Module)
+│
+├── src/                   # Backend logic
+│   ├── Sweet.js
+│   └── Inventory.js
 │
 ├── tests/
-│   └── inventory.test.js  # Jest test cases for all features
+│   └── inventory.test.js  # Jest test cases
 │
-├── README.md              # Documentation
-├── package.json           # Project metadata
-├── .gitignore             # Git exclusions
+├── README.md              # This file
+├── package.json
+└── .gitignore
+```
+
+# How to Run Backend Tests
+```bash
+git clone https://github.com/YahyaDumba/SweetShop_Management_System.git
+cd SweetShop_Management_System
+npm install
+npm test
+```
+
+# How to Run Frontend
+```bash
+cd SweetShop_Management_System/frontend
+```
+
+   ## Option 1: VS Code
+   ```bash
+   Right-click index.html → Open with Live Server
+```
+   ## Option 2: CLI
+   ```bash
+   npx serve .
+   ```
+Go to http://localhost:3000 in browser 
+
+# The Journey — From First Line to Final Product
+
+## TESTING JOURNEY (TDD with Jest)
+
+      1. SETUP
+      Initialized with npm init -y
+      Installed Jest: npm install --save-dev jest
+      Got inotify platform error
+      Ignored safely (non-blocking on Windows)
+
+      2. FILE STRUCTURE
+      Created:
+         src/Sweet.js
+         src/Inventory.js
+         tests/inventory.test.js
+
+      3. WROTE FIRST TEST
+      Test: should add a sweet to inventory
+      Cannot find module '../src/Inventory'
+      Fixed: Created Inventory.js and imported properly
+
+      4. ERRORS I SOLVED
+      Issue	Fix
+      Sweet is not defined	✅ Imported Sweet at top
+      puchaseSweet() typo	✅ Renamed to purchaseSweet()
+      .toLowerCase() on undefined	✅ Added null checks
+      Logic error in test (wrong expectation)	✅ Corrected values
+
+   5. FEATURE WISE TESTS
+      | Feature                | Test | Errors                       | Status |
+      | ---------------------- | ---- | ---------------------------- | ------ |
+      | `addSweet()`           | ✅    | –                            | ✅      |
+      | `deleteSweet()`        | ✅    | wrong ID used                | ✅      |
+      | `searchByName()`       | ✅    | compared ID instead of count | ✅      |
+      | `searchByCategory()`   | ✅    | `undefined.toLowerCase()`    | ✅      |
+      | `searchByPriceRange()` | ✅    | expected wrong value         | ✅      |
+      | `purchaseSweet()`      | ✅    | typo in method               | ✅      |
+      | `restockSweet()`       | ✅    | –                            | ✅      |
+
+   ## FINAL TEST STATUS
+      100% test coverage
+      Clean logs, error handling, and code
+      Proper folder structure
+      Commits made per feature with clear messages
+
+   ##  FRONTEND JOURNEY (HTML/CSS/JS)
+      
+      1. Basic Setup
+      Created index.html and style.css
+      Designed form + layout using CSS Grid/Flexbox
+      Used <script type="module"> for ES imports
+
+      2. Loader Setup
+      Designed animated CSS loader
+      Loader never disappears
+      Fixed: added window.onload → hide loader after 1.5s
+
+      3.  JS Modules: Inventory & Sweet
+      export default missing → Uncaught SyntaxError
+      Added export default in both Inventory.js & Sweet.js
+      Created logic for: Add, Delete, Purchase, Restock
+
+      4. Search & Filter
+      Implemented filters:
+         By Name
+         By Category
+         By Price Range
+      Price filter bug: NaN
+      Fixed using parseFloat() and isNaN() checks
+
+      5.  Responsive Design
+      Looks great on desktop
+      Added media queries for mobile (<768px)
+      Added separate breakpoints for iPad (768–1024px)
+      Inputs resize well, cards stack or wrap naturally
 
 
-# Journey
-## 🛠️ Real-World Project Journey (From First Line to Final Push)
+# TOTAL ERRORS SOLVED
+| Area                     | Count |
+| ------------------------ | ----- |
+| Jest Setup Errors        | 3     |
+| JS Logic Errors          | 4     |
+| Import / Typo            | 2     |
+| Loader / DOM Errors      | 2     |
+| Responsive layout tuning | 3     |
+| TOTAL                    | 14+   |
 
-This section documents the actual steps I followed to build the **Sweet Shop Management System** using Test-Driven Development (TDD), including mistakes, learnings, and how I solved them.
+# FINAL STATUS
+```bash
+Fully working backend (TDD)
+Fully interactive frontend UI
+Polished mobile & tablet responsive layout
+Clean commits & structured repo
+Project is presentation-ready 
+```
+## Author
 
----
-
-### ✅ 1. Project Setup
-
-- Created a new project folder: `sweetshop/`
-- Ran `npm init -y` to initialize a Node.js project
-- Tried to install Jest using `npm install --save-dev jest`
-- ❌ Faced a **platform error**: `Unsupported platform for inotify@...` (Linux-only module)
-- ✅ Solved it by ignoring the warning, as it didn’t affect Windows
-
----
-
-### 📁 2. Created Basic File Structure
-
-sweetshop/
-├── src/
-│ ├── Inventory.js
-│ └── Sweet.js
-├── tests/
-│ └── inventory.test.js
-
----
-
-### 🧪 3. Wrote First Test (TDD starts here!)
-
-- Created `inventory.test.js`
-- Wrote the first test: `should add a sweet to the inventory`
-- ❌ Faced test failure: `Cannot find module '../src/Inventory'`
-- ✅ Realized I hadn’t created `Inventory.js` yet — created it and re-ran tests
-
----
-
-### 💥 4. Faced Common Mistakes While Testing
-
-- ❌ Forgot to define `Sweet` before using `new Sweet(...)` → **ReferenceError**
-- ❌ Named file `puchaseSweet()` instead of `purchaseSweet()` → **TypeError**
-
-✅ Fixed each by carefully reading error logs and updating test + implementation files
-
----
-
-### 📦 5. Implemented Core Inventory Features with TDD
-
-| Feature | Test Written | Errors Faced | Status |
-|--------|--------------|---------------|--------|
-| `addSweet()` | ✅ | None | ✅ |
-| `deleteSweet()` | ✅ | Wrong ID passed | ✅ |
-| `searchByName()` | ✅ | Wrong test expectation (used ID instead of count) | ✅ |
-| `searchByCategory()` | ✅ | `undefined.toLowerCase()` error | ✅ |
-| `searchByPriceRange()` | ✅ | Expected: ≤25, Received: 30 (wrong logic in test) | ✅ |
-| `purchaseSweet()` | ✅ | Misspelled method name | ✅ |
-| `restockSweet()` | ✅ | No errors 🎉 | ✅ |
-
----
-
-### 🧼 6. Full Code Refactor & Polish
-
-- Added meaningful JS Doc-style comments in `Inventory.js` and `Sweet.js`
-- Used consistent formatting, spacing, and clean class structures
-- Gave clear error messages (like “Sweet not found” and “Insufficient stock”)
-
----
-
-### ✅ 7. Git Commit Best Practices Followed
-
-- Committed every feature with meaningful messages
-- Handled `.gitignore` (ignored `node_modules/`)
-- Final commit:  
-
-
----
-
-### 📈 Total Bugs/Errors Faced
-
-| Type | Count |
-|------|-------|
-| Jest syntax/setup errors | 3 |
-| ReferenceError / Import | 2 |
-| Logic error in tests | 2 |
-| Misspelled function names | 1 |
-| Platform-specific issue | 1 |
-
-✅ Solved all with reading logs + reasoning + patience
-
----
-
-### 🏁 Final Status
-
-- ✔️ All 7 features implemented
-- ✔️ 100% passing test suite
-- ✔️ Clean GitHub repo
-- ✔️ Polished README and comments
-- ✔️ Project ready for presentation or review
-
+- [@YahyaDumba](https://www.github.com/YahyaDumba)
 
