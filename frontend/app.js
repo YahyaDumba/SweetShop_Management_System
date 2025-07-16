@@ -3,29 +3,28 @@ import Sweet from "./Sweet.js";
 
 const inventory = new Inventory();
 
-// Added all the Elements
+// DOM Elements
 const addForm = document.getElementById("addSweetForm");
 const sweetList = document.getElementById("sweetList");
 const searchInput = document.getElementById("searchInput");
+const sortField = document.getElementById("sortField");
+const sortDirection = document.getElementById("sortDirection");
 const minPriceInput = document.getElementById("minPrice");
 const maxPriceInput = document.getElementById("maxPrice");
 
-// Loader: show for 1.5s before showing the app
+// Loader: hide after 1.5 seconds
 window.addEventListener("load", () => {
   setTimeout(() => {
     const loader = document.getElementById("loader");
     const main = document.getElementById("mainContent");
-
     if (loader && main) {
       loader.style.display = "none";
       main.style.display = "block";
-    } else {
-      console.error("Loader or mainContent element not found!");
     }
   }, 1500);
 });
 
-// RENDER SWEETS
+// RENDER SWEETS TO UI
 function renderSweets(sweets = inventory.viewSweets()) {
   sweetList.innerHTML = "";
 
@@ -37,46 +36,45 @@ function renderSweets(sweets = inventory.viewSweets()) {
   sweets.forEach((sweet) => {
     const card = document.createElement("div");
     card.className = "sweet-card";
-
     card.innerHTML = `
-        <h3>${sweet.name}</h3>
-        <p><strong>ID:</strong> ${sweet.id}</p>
-        <p><strong>Category:</strong> ${sweet.category}</p>
-        <p><strong>Price:</strong> ₹${sweet.price}</p>
-        <p><strong>Quantity:</strong> ${sweet.quantity}</p>
-        <div class="card-buttons">
-          <button class="delete">Delete</button>
-          <button class="purchase">Purchase</button>
-          <button class="restock">Restock</button>
-        </div>
-      `;
+      <h3>${sweet.name}</h3>
+      <p><strong>ID:</strong> ${sweet.id}</p>
+      <p><strong>Category:</strong> ${sweet.category}</p>
+      <p><strong>Price:</strong> ₹${sweet.price}</p>
+      <p><strong>Quantity:</strong> ${sweet.quantity}</p>
+      <div class="card-buttons">
+        <button class="delete">Delete</button>
+        <button class="purchase">Purchase</button>
+        <button class="restock">Restock</button>
+      </div>
+    `;
 
-    // Delete Sweet
+    // DELETE
     card.querySelector(".delete").addEventListener("click", () => {
       inventory.deleteSweet(sweet.id);
-      renderSweets();
+      applyFiltersAndSorting();
     });
 
-    // Purchase Sweet
+    // PURCHASE
     card.querySelector(".purchase").addEventListener("click", () => {
       const qty = prompt("How many units to purchase?");
       if (qty && !isNaN(qty)) {
         try {
           inventory.purchaseSweet(sweet.id, parseInt(qty));
-          renderSweets();
+          applyFiltersAndSorting();
         } catch (e) {
           alert(e.message);
         }
       }
     });
 
-    // Restock Sweet
+    // RESTOCK
     card.querySelector(".restock").addEventListener("click", () => {
       const qty = prompt("How many units to restock?");
       if (qty && !isNaN(qty)) {
         try {
           inventory.restockSweet(sweet.id, parseInt(qty));
-          renderSweets();
+          applyFiltersAndSorting();
         } catch (e) {
           alert(e.message);
         }
@@ -87,27 +85,33 @@ function renderSweets(sweets = inventory.viewSweets()) {
   });
 }
 
-// APPLY FILTERS
-function applyFilters() {
+// FILTER + SORT COMBINED
+function applyFiltersAndSorting() {
   const query = searchInput.value.toLowerCase();
   const min = parseFloat(minPriceInput.value);
   const max = parseFloat(maxPriceInput.value);
+  const field = sortField.value;
+  const direction = sortDirection.value;
 
-  const filtered = inventory.viewSweets().filter((s) => {
+  let sweets = inventory.viewSweets().filter((s) => {
     const matchesText =
       s.name.toLowerCase().includes(query) ||
       s.category.toLowerCase().includes(query);
-
     const matchesMin = isNaN(min) || s.price >= min;
     const matchesMax = isNaN(max) || s.price <= max;
-
     return matchesText && matchesMin && matchesMax;
   });
 
-  renderSweets(filtered);
+  sweets = sweets.slice().sort((a, b) => {
+    if (a[field] < b[field]) return direction === "asc" ? -1 : 1;
+    if (a[field] > b[field]) return direction === "asc" ? 1 : -1;
+    return 0;
+  });
+
+  renderSweets(sweets);
 }
 
-// ADD SWEET
+// ADD NEW SWEET
 addForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -126,13 +130,15 @@ addForm.addEventListener("submit", (e) => {
   inventory.addSweet(sweet);
 
   addForm.reset();
-  renderSweets();
+  applyFiltersAndSorting();
 });
 
-// LISTEN TO SEARCH / FILTER
-searchInput.addEventListener("input", applyFilters);
-minPriceInput.addEventListener("input", applyFilters);
-maxPriceInput.addEventListener("input", applyFilters);
+// EVENT LISTENERS
+searchInput.addEventListener("input", applyFiltersAndSorting);
+minPriceInput.addEventListener("input", applyFiltersAndSorting);
+maxPriceInput.addEventListener("input", applyFiltersAndSorting);
+sortField.addEventListener("change", applyFiltersAndSorting);
+sortDirection.addEventListener("change", applyFiltersAndSorting);
 
 // INITIAL RENDER
-renderSweets();
+applyFiltersAndSorting();
