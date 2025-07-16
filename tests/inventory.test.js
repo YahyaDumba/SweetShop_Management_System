@@ -31,6 +31,24 @@ describe("Sweet Shop Inventory System", () => {
     expect(sweets[0].id).toBe(1002);
   });
 
+  //Seperate Test Case for Viewing  Sweets
+  test("should view all sweets", () => {
+    const inventory = new Inventory();
+
+    const sweets = [
+      new Sweet(1001, "Kaju Katli", "Nut-Based", 50, 20),
+      new Sweet(1002, "Gajar Halwa", "Vegetable-Based", 30, 15),
+    ];
+
+    sweets.forEach((sweet) => inventory.addSweet(sweet));
+
+    const result = inventory.viewSweets();
+
+    expect(result.length).toBe(2);
+    expect(result[0].name).toBe("Kaju Katli");
+    expect(result[1].name).toBe("Gajar Halwa");
+  });
+
   //Searching Sweets
   describe("Searching Sweets on Different Parameters", () => {
     // Searching Sweet from Inventory on the basis of Name
