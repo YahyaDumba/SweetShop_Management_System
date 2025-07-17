@@ -2,6 +2,34 @@
 A fully tested and user-friendly inventory management system for sweets.
 Built with JavaScript, Jest (TDD), and Vanilla HTML/CSS/JS frontend — designed to look and feel like a real-world project.
 
+##  Functional Requirements
+
+| Feature                      | Description                                                                 |
+|-----------------------------|-----------------------------------------------------------------------------|
+| Add Sweet                   | Add new sweets with ID, name, category, price, and quantity                 |
+| Delete Sweet                | Delete any sweet from inventory using its unique ID                        |
+| View Sweets                 | View all sweets                           |
+| Search by Name              | Filter sweets based on sweet name                                          |
+| Search by Category          | Filter sweets based on category like Milk-Based, Nut-Based, etc.           |
+| Search by Price Range       | Set minimum and maximum price to view filtered sweets                      |
+| Sort by Name, Price, Qty    | Sort sweets by name, price or quantity (ascending or descending)           |
+| Purchase Sweet              | Purchase functionality reduces quantity after successful stock check       |
+| Restock Sweet               | Increases quantity for selected sweet                                      |
+| Responsive Frontend         | Fully interactive UI with form, loader, filters, and sweet cards           |
+
+## Non-Functional Requirements
+
+| Quality Attribute       | Description                                                                 |
+|-------------------------|-----------------------------------------------------------------------------|
+| Usability               | Clean and simple UI, intuitive for any shopkeeper                          |
+| Responsiveness          | Works seamlessly on desktops, tablets (iPads), and mobile phones            |
+| Performance             | Fast load times, minimal DOM manipulation, uses lightweight logic           |
+| Maintainability         | Code is modular (Sweet.js, Inventory.js, app.js) and easy to update         |
+| Testability             | Follows TDD, all features tested via Jest with 100% test coverage           |
+| Version Control         | All changes tracked in GitHub with clear and meaningful commit messages     |
+| Extensibility           | Codebase can easily be extended (e.g. add database, auth, dashboard later)  |
+
+
 # Features
 ```bash
 🍬 Manage a sweet shop inventory
@@ -12,6 +40,11 @@ Built with JavaScript, Jest (TDD), and Vanilla HTML/CSS/JS frontend — designed
 ✅ Fully tested using Jest (Test-Driven Development)
 🎨 Professionally designed frontend UI
 🧼 Clean code with meaningful Git commits
+🔃 Sort sweets by Name, Price, or Quantity (asc/desc)
+📱 Fully responsive frontend (Mobile, Tablet, Desktop)
+
+
+
 ```
 # Project Structure
 ```bash
@@ -97,6 +130,18 @@ Go to http://localhost:3000 in browser
       | `searchByPriceRange()` | ✅    | expected wrong value         | ✅      |
       | `purchaseSweet()`      | ✅    | typo in method               | ✅      |
       | `restockSweet()`       | ✅    | –                            | ✅      |
+      `sortBy()`|	✅ |	Logic bug|	✅
+
+       
+       6. Added Sorting Feature (Backend)
+      Introduced sortBy(field, direction) method inside Inventory.js 
+   Allowed sorting by:
+   
+name (alphabetically)
+
+price (numerically)
+
+quantity (stock units)
 
    ## FINAL TEST STATUS
       100% test coverage
@@ -134,6 +179,12 @@ Go to http://localhost:3000 in browser
       Added media queries for mobile (<768px)
       Added separate breakpoints for iPad (768–1024px)
       Inputs resize well, cards stack or wrap naturally
+      
+      6. Sorting Feature
+      Added sorting dropdowns for Name, Price, Quantity
+      Supports both Ascending & Descending orders
+      Faced issue: sorting and filtering were overriding each other
+      Solved it by combining logic in a unified applyFiltersAndSorting() function
 
 
 # TOTAL ERRORS SOLVED
@@ -143,6 +194,7 @@ Go to http://localhost:3000 in browser
 | JS Logic Errors          | 4     |
 | Import / Typo            | 2     |
 | Loader / DOM Errors      | 2     |
+|Sorting and Filtering Conflict|1  |
 | Responsive layout tuning | 3     |
 | TOTAL                    | 14+   |
 
@@ -151,6 +203,8 @@ Go to http://localhost:3000 in browser
 Fully working backend (TDD)
 Fully interactive frontend UI
 Polished mobile & tablet responsive layout
+Sorting integrated into both frontend and testable backend
+Responsive design works perfectly across devices
 Clean commits & structured repo
 Project is presentation-ready 
 ```
