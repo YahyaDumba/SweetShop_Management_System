@@ -1,6 +1,6 @@
 # Sweet Shop Management System
 A fully tested and user-friendly inventory management system for sweets.
-Built with JavaScript, Jest (TDD), and Vanilla HTML/CSS/JS frontend — designed to look and feel like a real-world project.
+Built with JavaScript, Jest (TDD), and Vanilla HTML/CSS/JS frontend — designed to look and feel like a real-world project. ( I have also added My Journey for Both Frontend and TDD to depict what a RollerCoaster it have been )
 
 ##  Functional Requirements
 
